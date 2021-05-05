@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "4c4afb2a-20ed-42c4-8618-687fb9a2914a",
+      "email": "test@example.com",
+      "name": "TestUser",
+      "password": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+    },
+    {
+      "id": "5767d02b-9d6f-497c-9ae5-ce1521de5bd8",
+      "email": "admin@admin.com",
+      "name": "StanK",
+      "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+    },
+    {
+      "id": "b29eb6ab-5fdc-445a-b498-7099c747819c",
+      "email": "valid@user.com",
+      "name": "ValidUser",
+      "password": "fa2a77176e90a670c758c3d009402bb0f78bb9e8a3dd8b1fc483147a774c87ce"
+    }
+  ]
+}

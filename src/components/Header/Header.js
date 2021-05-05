@@ -1,0 +1,68 @@
+import { Component } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+
+import { toast } from 'react-toastify';
+
+import * as common from '../../shared/common';
+import './Header.css';
+
+export default class Header extends Component {
+    constructor() {
+        super();
+    
+        this.state = {
+          isBurgerMenuClicked: false
+        }
+    
+        this.handleBurgerMenuClick = this.handleBurgerMenuClick.bind(this);
+        this.userLogout = this.userLogout.bind(this);
+    }
+
+    handleBurgerMenuClick() {
+        this.setState(prevState => ({
+            isBurgerMenuClicked: !prevState.isBurgerMenuClicked
+        }));
+    }
+
+    userLogout() {
+        toast.warning("You have succsessfully logged out");
+        this.props.handleLogout();
+    }
+
+    render() {
+        // TODO: try to think of better way to hide/display these elements!
+        const loginStyle = this.props.loggedInStatus === common.LOGGED_IN_STATUS ? "none" : "";
+        const logoutStyle = loginStyle !== "none" ? "none" : "";
+        const burgerMenuBarsStyle = this.state.isBurgerMenuClicked ? "change" : "";
+
+        return (
+            <div className="header">
+                <Link to="/" className="logo">ATA</Link>
+                <div className={`header__burger ${burgerMenuBarsStyle}`} onClick={this.handleBurgerMenuClick} >
+                    <div className="bar1"></div>
+                    <div className="bar2"></div>
+                    <div className="bar3"></div>
+                </div>
+                <div className={`header__navbar ${burgerMenuBarsStyle}`}>
+                    <ul>
+                        <li>
+                            <NavLink exact={true} to="/">Home</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/about">About</NavLink>
+                        </li>
+                        <li>
+                            <NavLink style={{display: `${loginStyle}`}} to="/login">Login</NavLink>
+                        </li>
+                        <li>
+                            <NavLink style={{display: `${loginStyle}`}} to="/register">Register</NavLink>
+                        </li>
+                        <li>
+                            <Link style={{display: `${logoutStyle}`}} onClick={this.userLogout} to="/logout">Logout</Link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        )
+    }
+};
