@@ -16,15 +16,19 @@ You need to open the `server` folder in integrated terminal and then run:
 
 ### `json-server --watch db.json --port 3004`
 
-Start JSON Server on port 3004.\
+Starts JSON Server on port 3004.\
 Now if you go to [http://localhost:3004/users](http://localhost:3004/users), you will get all available users.
 
 ## Login Users Data
 
-There are three users in the `db.json` file:
+There are three users in the `db.json` file.\
+Below you can see the `unhashed` passwords for of them:
 
-### `email: test@example.com; password: test`
+1. ### email: `test@example.com`
+   ### password: `test`
 
-### `email: admin@admin.com; password: admin`
+2. ### email: `admin@admin.com`
+   ### password: `admin`
 
-### `email: valid@user.com; password: vuser`
+3. #### email: `valid@user.com`
+   #### password: `vuser`
