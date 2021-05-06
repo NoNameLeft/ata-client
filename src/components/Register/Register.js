@@ -7,8 +7,8 @@ import { sha256 } from 'js-sha256';
 import { toast } from 'react-toastify';
 
 import * as usersService from '../../services/usersService';
+import * as messages from '../../shared/messages';
 
-import './Register.css';
 const Register = () => {
     const [email, setEmail] = useState('');
     const [uname, setUname] = useState('');
@@ -20,7 +20,6 @@ const Register = () => {
     function registerUser(e) {
         e.preventDefault();
         
-
         if(psw === pswRepeat) {
             const userData = {
                 id: uuidv4(),
@@ -31,12 +30,12 @@ const Register = () => {
             
             usersService.register(userData)
                 .then(() => {
-                    toast.success('You have successfully registered');
+                    toast.success(messages.REGISTER_SUCCESS_MESSAGE);
                     history.push('/login');
                 })
                 .catch(err => {
                     console.log(err);
-                    toast.error("Something went wrong! Try again!");
+                    toast.error(messages.GENERIC_ERROR_MESSAGE);
                 });
         }
     }
@@ -57,11 +56,11 @@ const Register = () => {
             <label htmlFor="pswRepeat"><b>Repeat Password</b></label>
             <input type="password" placeholder="Repeat Password" name="pswRepeat" id="pswRepeat" onChange={(e) => setPswRepeat(e.target.value)} required />
 
-            <button type="submit" className="registerbtn">Register</button>
-        </div>
-  
-        <div className="container signin">
-            <p>Already have an account? <Link to="/login">Sign in</Link>.</p>
+            <button type="submit" className="primarybtn">Register</button>
+
+            <div className="container__secondary">
+                <p>Already have an account? <Link to="/login">Sign in</Link>.</p>
+            </div>
         </div>
     </form>
     );

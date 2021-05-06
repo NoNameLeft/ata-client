@@ -37,11 +37,11 @@ export default class Header extends Component {
 
         return (
             <div className="header">
-                <Link to="/" className="logo">ATA</Link>
+                <Link to="/about" className="header__logo">ATA</Link>
                 <div className={`header__burger ${burgerMenuBarsStyle}`} onClick={this.handleBurgerMenuClick} >
-                    <div className="bar1"></div>
-                    <div className="bar2"></div>
-                    <div className="bar3"></div>
+                    <div className="topline"></div>
+                    <div className="middleline"></div>
+                    <div className="bottomline"></div>
                 </div>
                 <div className={`header__navbar ${burgerMenuBarsStyle}`}>
                     <ul>
@@ -49,7 +49,7 @@ export default class Header extends Component {
                             <NavLink exact={true} to="/">Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/about">About</NavLink>
+                            <NavLink to="/profile">Profile</NavLink>
                         </li>
                         <li>
                             <NavLink style={{display: `${loginStyle}`}} to="/login">Login</NavLink>

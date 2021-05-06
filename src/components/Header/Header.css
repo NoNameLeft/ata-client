@@ -1,112 +1,119 @@
-  .header {
-    overflow: hidden;
-    background-color: #f1f1f1;
-    padding: 10px 10px;
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 10px 10px;
+}
+
+.header li {
+  float: left;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header li a {
+  padding: 12px;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+  color: black;
+}
+  
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+  
+.header a.active {
+  border: 1px solid #272727;
+  border-radius: 15px;
+  background-color: #dcdcdc;
+  color: #04AA6D
+}
+
+.header__logo {
+  font-size: 36px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+  
+.header__navbar {
+  height: 3.5rem;
+  float: right;
+  align-items: center;
+}
+
+.header__navbar ul {
+  display: block;
+}
+
+.header__burger {
+  display: none;
+  cursor: pointer;
+}
+  
+.topline, 
+.middleline, 
+.bottomline {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+  
+.change 
+.topline {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+  
+.change 
+.middleline {
+  opacity: 0;
+}
+  
+.change 
+.bottomline {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+  
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: inline-block;
+    text-align: left;
   }
 
-  .header li {
-    float: left;
-    color: black;
-    text-align: center;
-    text-decoration: none;
-    font-size: 18px;
-    line-height: 25px;
-    border-radius: 4px;
-  }
-
-  .header li a {
-    padding: 12px;
-    font-size: 18px;
-    line-height: 25px;
-    border-radius: 4px;
-    color: black;
-  }
-  
-  .logo {
-    font-size: 36px;
-    font-weight: bold;
-    text-decoration: underline;
-  }
-  
-  .header a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .header a.active {
-    border: 1px solid #272727;
-    border-radius: 15px;
-    background-color: #dcdcdc;
-    color: #04AA6D
-  }
-  
   .header__navbar {
-    height: 3.5rem;
-    float: right;
-    align-items: center;
-  }
-
-  .header__navbar ul {
-    display: block;
+    float: none;
+    height: auto;
   }
 
   .header__burger {
+    display: block;
+    float: right;
+  }
+
+  .header__navbar ul {
     display: none;
-    cursor: pointer;
   }
-  
-  .bar1, .bar2, .bar3 {
-    width: 35px;
-    height: 5px;
-    background-color: #333;
-    margin: 6px 0;
-    transition: 0.4s;
+
+  .header__navbar ul li {
+    float: right;
+    clear: right;
   }
-  
-  .change .bar1 {
-    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
-    transform: rotate(-45deg) translate(-9px, 6px);
+
+  .header__logo {
+    font-size: 25px;
+    display: inline-block;
   }
-  
-  .change .bar2 {opacity: 0;}
-  
-  .change .bar3 {
-    -webkit-transform: rotate(45deg) translate(-8px, -8px);
-    transform: rotate(45deg) translate(-8px, -8px);
+
+  .header__navbar.change ul {
+    display: block;
   }
-  
-  @media screen and (max-width: 500px) {
-    .header a {
-      float: none;
-      display: inline-block;
-      text-align: left;
-    }
-
-    .header__navbar {
-      float: none;
-      height: auto;
-    }
-
-    .header__burger {
-      display: block;
-      float: right;
-    }
-
-    .header__navbar ul {
-      display: none;
-    }
-
-    .header__navbar ul li {
-      float: right;
-      clear: right;
-    }
-
-    .logo {
-      font-size: 25px;
-      display: inline-block;
-    }
-
-    .header__navbar.change ul {
-      display: block;
-    }
-  }
+}

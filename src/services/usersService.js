@@ -11,18 +11,33 @@ export const register = (userData) => {
     });
 }
 
-export const login = (userData) => {
+export const login = async (userData) => {
     let userUrl = url + `?email=${userData.email}&password=${userData.password}`;
 
-    return fetch(userUrl)
-        .then(res => res.json())
-        .catch(err => console.log(err));
+    try {
+        const res = await fetch(userUrl);
+        return await res.json();
+    } catch (err) {
+        return console.log(err);
+    }
 }
 
-export const loggedInStatus = (userID) => {
+export const getCurrentUser = async (userID) => {
     let userUrl = url + `?id=${userID}`;
 
-    return fetch(userUrl)
-        .then(res => res.json())
-        .catch(err => console.log(err));
+    try {
+        const res = await fetch(userUrl);
+        return await res.json();
+    } catch (err) {
+        return console.log(err);
+    }
+}
+
+export const getAllUsers = async () => {
+    try {
+        const res = await fetch(url);
+        return await res.json();
+    } catch (err) {
+        return console.log(err);
+    }
 }

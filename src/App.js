@@ -10,6 +10,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Register from './components/Register';
 import Login from './components/Login';
+import Profile from './components/Profile';
 
 import './App.css';
 import * as usersService from './services/usersService';
@@ -22,7 +23,7 @@ class App extends Component {
 
     this.state = {
       loggedInStatus: common.DEFAULT_LOGIN_STATUS,
-      uname: common.DEFAULT_USER
+      uname: common.DEFAULT_USER,
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -30,29 +31,19 @@ class App extends Component {
   }
 
   checkLoginStatus() {
-    var userToken = localStorage.getItem(common.STORAGE_KEY);
-
-    if(userToken) {
-      try {
-        var userData = jwt.verify(userToken, common.TOKEN_SECRET);
-        
-        usersService.loggedInStatus(userData.userID)
+    jwt.verify(localStorage.getItem(common.STORAGE_KEY), common.TOKEN_SECRET, (err, decoded) => {
+      if(!err) {
+          usersService.getCurrentUser(decoded.userID)
           .then(res => {
-            if(res.length > 0) {
-              this.handleLogin(res[0].name);
-            }
+            let user = res.find(Boolean);
+            this.handleLogin(user.name);
           })
-          .catch(err => console.log(err));
-      } catch (err) {
-        console.log(err);
+          .catch(err => {
+              console.log(err);
+              this.handleLogout();
+          });
       }
-    }
-    else {
-      this.setState({
-        loggedInStatus: common.DEFAULT_LOGIN_STATUS,
-        uname: common.DEFAULT_USER
-      });
-    }
+    });
   }
 
   componentDidMount() {
@@ -60,6 +51,7 @@ class App extends Component {
   }
 
   handleLogout() {
+    localStorage.removeItem(common.STORAGE_KEY);
     this.setState({
       loggedInStatus: common.DEFAULT_LOGIN_STATUS,
       uname: common.DEFAULT_USER
@@ -87,9 +79,7 @@ class App extends Component {
             <Route exact path="/" render={() => {
               return <Home uname={this.state.uname} />
             }} />
-            <Route path="/about" render={() => {
-              return <About userStatus={this.state.loggedInStatus} />
-            }} />
+            <Route path="/about" component={About} />
             <Route path="/register" component={Register} />
             <Route path="/login" render={() => {
               return <Login handleLogin={this.handleLogin} />
@@ -97,6 +87,9 @@ class App extends Component {
             <Route path="/logout" render={() => {
               localStorage.removeItem(common.STORAGE_KEY);
               return <Redirect to="/" />
+            }} />
+            <Route path="/profile" render={() => {
+              return <Profile userStatus={this.state.loggedInStatus} />
             }} />
           </Switch>
         </div>

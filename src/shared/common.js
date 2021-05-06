@@ -2,7 +2,7 @@ export const TOKEN_SECRET = "1c047baf23d51737043eeff80ed79ae85a336b4eec60ca25641
 
 export const STORAGE_KEY = "utoken";
 
-export const DEFAULT_USER = "guest";
+export const DEFAULT_USER = "GUEST";
 
 export const DEFAULT_LOGIN_STATUS = "NOT_LOGGED_IN";
 

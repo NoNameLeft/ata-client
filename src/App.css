@@ -1,21 +1,3 @@
-* {
-  box-sizing: border-box
-}
-
-h1, h3 {
-  text-align: center;
-}
-
-li {
-  text-decoration: none;
-  list-style-type: none;
-}
-
-a {
-  text-decoration: none;
-  color: #04AA6D;
-}
-
 input[type=text],
 input[type=password] {
   width: 100%;
@@ -36,22 +18,56 @@ input[type=password]:focus {
   margin: auto;
   width: 90%;
   padding: 16px;
+  background-color: #F5FFFA;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.container__secondary {
+  margin: auto;
+  text-align: center;
+}
+
+.container__secondary a {
+  text-decoration: underline;
+}
+
+.container__secondary a:hover {
+  color: black;
+  font-weight: bold;
+}
+
+.primarybtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.primarybtn:hover {
+  opacity:1;
 }
 
 @media screen and (min-width: 600px) {
-  .container {
+  .container,
+  .container__secondary {
     width: 85%;
   }
 }
 
 @media screen and (min-width: 900px) {
-  .container {
+  .container,
+  .container__secondary {
     width: 70%;
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .container {
+  .container,
+  .container__secondary {
     width: 50%;
   }
 }
