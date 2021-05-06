@@ -24,8 +24,8 @@ Now if you go to [http://localhost:3004/users](http://localhost:3004/users), you
 There are three users in the `db.json` file.\
 Below you can see the `unhashed` passwords for of them:
 
-1. #### email: `test@example.com` #### password: `test`
+1. #### email: `test@example.com` password: `test`
 
-2. #### email: `admin@admin.com`  #### password: `admin`
+2. #### email: `admin@admin.com` password: `admin`
 
-3. #### email: `valid@user.com`  #### password: `vuser`
+3. #### email: `valid@user.com` password: `vuser`
