@@ -1,5 +1,5 @@
 
-const url = "http://localhost:3004/users";
+const url = "http://localhost:8080/users";
 
 export const register = (userData) => {
     return fetch(url, {
