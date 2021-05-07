@@ -15,7 +15,9 @@ import './App.css';
 import auth from './middlewares/auth';
 import * as common from './shared/common';
 import * as usersService from './services/usersService';
-import { ProtectedRoute } from './middlewares/protectedRoute';
+import * as themes from './shared/themes';
+import { ProtectedRoute } from './hocs/protectedRoute';
+import { ThemeProvider } from 'styled-components';
 
 class App extends Component {
 
@@ -25,19 +27,19 @@ class App extends Component {
     this.state = {
       loggedInStatus: common.DEFAULT_LOGIN_STATUS,
       uname: common.DEFAULT_USER,
+      theme: themes.LIGHT_THEME
     }
 
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.changeThemeColor = this.changeThemeColor.bind(this);
   }
 
   componentDidMount() {
-    let userInfo = auth.isAuthenticated();
-    if(userInfo.isAuth) {
-      usersService.getCurrentUser(userInfo.currentUserId)
-        .then(res => {
-          this.handleLogin(res.find(Boolean).name);
-        })
+    let authUserData = auth.isAuthenticated();
+    if (authUserData.isAuth) {
+      usersService.getCurrentUser(authUserData.currentUserId)
+        .then(res => { this.handleLogin(res.find(Boolean).name) })
         .catch(err => {
           console.log(err);
           this.handleLogout();
@@ -63,16 +65,26 @@ class App extends Component {
     });
   }
 
+  changeThemeColor() {
+    this.setState(prevState => ({
+      theme: prevState.theme === themes.LIGHT_THEME ? themes.DARK_THEME : themes.LIGHT_THEME
+    }));
+  }
+
   render() {
     return (
+      <ThemeProvider theme={this.state.theme === "light" ? themes.LIGHT_STYLE : themes.DARK_STYLE}>
+        <themes.GlobalStyles />
         <div>
           <>
-            <ToastContainer draggable={false} transition={Zoom} autoClose={3000} position={'top-center'}/>
+            <ToastContainer draggable={false} transition={Zoom} autoClose={3000} position={'top-center'} />
           </>
-          <Header 
+          <Header
             loggedInStatus={this.state.loggedInStatus}
             handleLogout={this.handleLogout}
-           />
+            changeThemeColor={this.changeThemeColor}
+            currentTheme={this.state.theme}
+          />
           <Switch>
             <Route exact path="/" render={() => {
               return <Home uname={this.state.uname} />
@@ -91,6 +103,7 @@ class App extends Component {
             }} />
           </Switch>
         </div>
+      </ThemeProvider>
     )
   }
 }

@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 
 import { toast } from 'react-toastify';
 
-import auth from "./auth";
+import auth from "../middlewares/auth";
 import * as messages from '../shared/messages';
 
 export const ProtectedRoute = ({

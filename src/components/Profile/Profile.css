@@ -29,7 +29,7 @@
     opacity: 0.9;
 }
 
-.card__btn:hover, a:hover {
+.card__btn:hover {
     opacity: 1;
 }
 
@@ -39,4 +39,8 @@
 
 .card__icons a {
     color: grey;
+}
+
+.card__icons a:hover {
+    color: black;
 }

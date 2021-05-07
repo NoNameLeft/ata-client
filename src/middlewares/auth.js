@@ -17,6 +17,7 @@ class Auth {
             this.authenticated = true;
         } catch {
             this.authenticated = false;
+            this.userID = "";
         }
     }
 

@@ -81,6 +81,73 @@
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
 }
+
+.header__switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 24px;
+  top: -7px;
+  left: 14px;
+}
+
+.header__switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.switch__slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  bottom: 4px;
+  background-color: #f1f1f1;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .switch__slider {
+  background-color: #04AA6D;
+}
+
+input:focus + .switch__slider {
+  box-shadow: 0 0 1px #04AA6D;
+}
+
+input:checked + .switch__slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.switch__slider.round {
+  border-radius: 30px;
+}
+
+.switch__slider.round:before {
+  border-radius: 50%;
+}
+
+.slider__state {
+  font-weight: bold;
+  color: black;
+  position: relative;
+  left: 38px;
+}
   
 @media screen and (max-width: 500px) {
   .header a {

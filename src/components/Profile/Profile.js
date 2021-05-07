@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import jwt from 'jsonwebtoken';
 import { FaFacebook, FaLinkedin, FaTwitter, FaDribbble } from 'react-icons/fa';
 
 import * as common from '../../shared/common';
 import * as usersService from '../../services/usersService';
+import auth from '../../middlewares/auth';
 import './Profile.css';
 
 const Profile = (props) => {
@@ -13,17 +13,12 @@ const Profile = (props) => {
     let [userInfo, setUserInfo] = useState({});
 
     useEffect(() => {
-        jwt.verify(localStorage.getItem(common.STORAGE_KEY), common.TOKEN_SECRET, (err, decoded) => {
-            if(!err) {
-                usersService.getCurrentUser(decoded.userID)
-                .then(res => {
-                    setUserInfo(res.find(Boolean));
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-            }
-        });
+        let authUserData = auth.isAuthenticated();
+        if(authUserData.isAuth) {
+            usersService.getCurrentUser(authUserData.currentUserId)
+            .then(res => { setUserInfo(res.find(Boolean)) })
+            .catch(err => console.log(err));
+        }
     }, []);
 
     const status = props.userStatus === common.LOGGED_IN_STATUS ? "online" : "offline"

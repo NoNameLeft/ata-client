@@ -17,6 +17,7 @@ export default class Header extends Component {
     
         this.handleBurgerMenuClick = this.handleBurgerMenuClick.bind(this);
         this.userLogout = this.userLogout.bind(this);
+        this.handlechangeThemeColor = this.handlechangeThemeColor.bind(this);
     }
 
     handleBurgerMenuClick() {
@@ -30,6 +31,10 @@ export default class Header extends Component {
         this.props.handleLogout();
     }
 
+    handlechangeThemeColor() {
+        this.props.changeThemeColor();
+    }
+
     render() {
         // TODO: try to think of better way to hide/display these elements!
         const loginStyle = this.props.loggedInStatus === common.LOGGED_IN_STATUS ? "none" : "";
@@ -39,6 +44,11 @@ export default class Header extends Component {
         return (
             <div className="header">
                 <Link to="/about" className="header__logo">ATA</Link>
+                <label className="header__switch">
+                    <input type="checkbox" defaultChecked onChange={this.handlechangeThemeColor} />
+                    <span className="switch__slider round"></span>
+                    <span className="slider__state">{this.props.currentTheme}</span>
+                </label>
                 <div className={`header__burger ${burgerMenuBarsStyle}`} onClick={this.handleBurgerMenuClick} >
                     <div className="topline"></div>
                     <div className="middleline"></div>
