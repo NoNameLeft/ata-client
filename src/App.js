@@ -3,7 +3,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import jwt from 'jsonwebtoken';
 
 import Header from './components/Header';
 import Home from './components/Home';
@@ -13,8 +12,10 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 
 import './App.css';
-import * as usersService from './services/usersService';
+import auth from './middlewares/auth';
 import * as common from './shared/common';
+import * as usersService from './services/usersService';
+import { ProtectedRoute } from './middlewares/protectedRoute';
 
 class App extends Component {
 
@@ -30,24 +31,21 @@ class App extends Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  checkLoginStatus() {
-    jwt.verify(localStorage.getItem(common.STORAGE_KEY), common.TOKEN_SECRET, (err, decoded) => {
-      if(!err) {
-          usersService.getCurrentUser(decoded.userID)
-          .then(res => {
-            let user = res.find(Boolean);
-            this.handleLogin(user.name);
-          })
-          .catch(err => {
-              console.log(err);
-              this.handleLogout();
-          });
-      }
-    });
-  }
-
   componentDidMount() {
-    this.checkLoginStatus();
+    let userInfo = auth.isAuthenticated();
+    if(userInfo.isAuth) {
+      usersService.getCurrentUser(userInfo.currentUserId)
+        .then(res => {
+          this.handleLogin(res.find(Boolean).name);
+        })
+        .catch(err => {
+          console.log(err);
+          this.handleLogout();
+        });
+    }
+    else {
+      this.handleLogout();
+    }
   }
 
   handleLogout() {
@@ -79,7 +77,7 @@ class App extends Component {
             <Route exact path="/" render={() => {
               return <Home uname={this.state.uname} />
             }} />
-            <Route path="/about" component={About} />
+            <ProtectedRoute exact path="/about" component={About} />
             <Route path="/register" component={Register} />
             <Route path="/login" render={() => {
               return <Login handleLogin={this.handleLogin} />

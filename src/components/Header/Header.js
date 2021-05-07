@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import * as common from '../../shared/common';
+import * as messages from '../../shared/messages';
 import './Header.css';
 
 export default class Header extends Component {
@@ -25,7 +26,7 @@ export default class Header extends Component {
     }
 
     userLogout() {
-        toast.warning("You have succsessfully logged out");
+        toast.info(messages.LOGOUT_SUCCESS_MESSAGE);
         this.props.handleLogout();
     }
 
