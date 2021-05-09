@@ -14,10 +14,10 @@ You will also see any lint errors in the console.
 
 You need to open the `server` folder in integrated terminal and then run:
 
-### `json-server --watch db.json --port 3004`
+### `node index.js`
 
-Starts JSON Server on port 3004.\
-Now if you go to [http://localhost:3004/users](http://localhost:3004/users), you will get all available users.
+Starts JSON Server on port 8080.\
+Now if you go to [http://localhost:8080/users](http://localhost:8080/users), you will get all available users.
 
 ## Login Users Data
 
