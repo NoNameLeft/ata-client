@@ -12,10 +12,8 @@ export const register = (userData) => {
 }
 
 export const login = async (userData) => {
-    let userUrl = url + `?email=${userData.email}&password=${userData.password}`;
-
     try {
-        const res = await fetch(userUrl);
+        const res = await fetch(`${url}?email=${userData.email}&password=${userData.password}`);
         return await res.json();
     } catch (err) {
         return console.log(err);
@@ -23,10 +21,8 @@ export const login = async (userData) => {
 }
 
 export const getCurrentUser = async (userID) => {
-    let userUrl = url + `?id=${userID}`;
-
     try {
-        const res = await fetch(userUrl);
+        const res = await fetch(`${url}/${userID}`);
         return await res.json();
     } catch (err) {
         return console.log(err);
@@ -40,4 +36,23 @@ export const getAllUsers = async () => {
     } catch (err) {
         return console.log(err);
     }
+}
+
+export const update = (userID, userData) => {
+    return fetch(`${url}/${userID}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData)
+    });
+}
+
+export const deleteUser = (userID) => {
+    return fetch(`${url}/${userID}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
 }

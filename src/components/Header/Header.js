@@ -2,12 +2,15 @@ import { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
+import AuthContext from '../../contexts/AuthContext';
 
 import * as common from '../../shared/common';
 import * as messages from '../../shared/messages';
 import './Header.css';
 
 export default class Header extends Component {
+    static contextType = AuthContext
+
     constructor() {
         super();
     
@@ -37,7 +40,7 @@ export default class Header extends Component {
 
     render() {
         // TODO: try to think of better way to hide/display these elements!
-        const loginStyle = this.props.loggedInStatus === common.LOGGED_IN_STATUS ? "none" : "";
+        const loginStyle = this.context.user.status === common.LOGGED_IN_STATUS ? "none" : "";
         const logoutStyle = loginStyle !== "none" ? "none" : "";
         const burgerMenuBarsStyle = this.state.isBurgerMenuClicked ? "change" : "";
 

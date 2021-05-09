@@ -31,7 +31,7 @@ const Login = (props) => {
                 }
                 else {
                     localStorage.setItem(common.STORAGE_KEY, jwt.sign({ userID: res[0].id }, common.TOKEN_SECRET, { expiresIn: '2 days' }));
-                    props.handleLogin(res[0].name);
+                    props.handleLogin(res.find(Boolean));
                     toast.success(messages.LOGIN_SUCCESS_MESSAGE);
                     history.push('/');
                 }

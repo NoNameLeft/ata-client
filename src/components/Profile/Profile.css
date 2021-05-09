@@ -15,13 +15,12 @@
     width: 90%;
 }
   
-.card__btn {
+.card__btns button {
     border: none;
     outline: 0;
     display: inline-block;
     padding: 8px;
     color: white;
-    background-color: #04AA6D;
     text-align: center;
     cursor: pointer;
     width: 100%;
@@ -29,8 +28,8 @@
     opacity: 0.9;
 }
 
-.card__btn:hover {
-    opacity: 1;
+.card__btns button:hover {
+    opacity: 0.7;
 }
 
 .card__icons {
@@ -43,4 +42,99 @@
 
 .card__icons a:hover {
     color: black;
+}
+
+.editBtn {
+    background-color: #EF9B0F;
+}
+
+.deleteBtn {
+    background-color: #FE3636;
+}
+
+.card__secret {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #474e5d;
+    padding-top: 50px;
+}
+
+.card__secret button {
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.card__secret button:hover {
+    opacity: 1;
+}
+
+.secret__content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.content__container {
+    padding: 16px;
+    text-align: center;
+}
+
+.container__btns::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.cancelBtn,
+.removeBtn {
+    float: left;
+    width: 50%;
+  }
+  
+.cancelBtn {
+    background-color: #ccc;
+    color: black;
+}
+  
+.removeBtn {
+    background-color: #f44336;
+}
+
+.closeBtn {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+    color: #f44336;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+    .card__secret button {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .secret__content {
+        width: 50%;
+    }
 }

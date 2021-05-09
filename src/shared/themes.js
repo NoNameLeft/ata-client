@@ -25,7 +25,6 @@ export const GlobalStyles = createGlobalStyle`
         color: ${(props) => props.theme.fontColor};
 	}
 
-    .card__btn,
     .primarybtn {
         background-color: ${(props) => props.theme.buttonColor}
     }
@@ -44,5 +43,13 @@ export const GlobalStyles = createGlobalStyle`
 
     .card__icons a {
         color: ${(props) => props.theme.cardFontColor};
+    }
+
+    .content__container {
+        background-color: ${(props) => props.theme.cardBackground};
+    }
+
+    .cancelBtn {
+        background-color: ${(props) => props.theme.buttonColor}
     }
 `;

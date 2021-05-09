@@ -7,3 +7,7 @@ export const DEFAULT_USER = "GUEST";
 export const DEFAULT_LOGIN_STATUS = "NOT_LOGGED_IN";
 
 export const LOGGED_IN_STATUS = "LOGGED_IN";
+
+export const ONLINE_USER = "ONLINE";
+
+export const OFFLINE_USER = "OFFLINE"
