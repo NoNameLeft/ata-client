@@ -1,5 +1,10 @@
 # Getting Started with Authentication Template App
 
+## Before you start
+
+### `npm install`
+Installs all of the necessary packages in order to run this project.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -14,7 +19,7 @@ You will also see any lint errors in the console.
 
 You need to open the `server` folder in integrated terminal and then run:
 
-### `node index.js`
+### `json-server --watch db.json --port 8080`
 
 Starts JSON Server on port 8080.\
 Now if you go to [http://localhost:8080/users](http://localhost:8080/users), you will get all available users.
