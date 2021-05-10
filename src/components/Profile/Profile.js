@@ -19,6 +19,12 @@ const Profile = (props) => {
     let [userInfo, setUserInfo] = useState({});
     let [displayStyleProps, setDisplayStyleProps] = useState("none");
     
+    /*
+        When user update their info it redirects directly to profile page.
+        To avoid 'useEffect' hook I used context value.
+        However the info doesn't update without page refresh.
+        So, I went back to just getting the user data every time they click their profile page.
+    */
     useEffect(() => {
         let authUserData = auth.isAuthenticated();
         if(authUserData.isAuth) {
@@ -62,6 +68,9 @@ const Profile = (props) => {
             }).catch(err => console.log(err))
     }
 
+    /*
+        I still get the user status via context value, because users cannot access EditProfile page, if they aren't logged in. 
+    */
     const status = contextValue.user.status === common.LOGGED_IN_STATUS ? common.ONLINE_USER : common.OFFLINE_USER
     
     return (

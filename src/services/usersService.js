@@ -1,4 +1,3 @@
-
 const url = "http://localhost:8080/users";
 
 export const register = (userData) => {

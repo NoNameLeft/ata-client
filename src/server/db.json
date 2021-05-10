@@ -10,7 +10,8 @@
       "id": "5767d02b-9d6f-497c-9ae5-ce1521de5bd8",
       "email": "admin@admin.com",
       "name": "Stan",
-      "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+      "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+      "theme": "dark"
     },
     {
       "id": "b29eb6ab-5fdc-445a-b498-7099c747819c",

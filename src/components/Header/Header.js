@@ -18,8 +18,8 @@ export default class Header extends Component {
           isBurgerMenuClicked: false
         }
     
-        this.handleBurgerMenuClick = this.handleBurgerMenuClick.bind(this);
         this.userLogout = this.userLogout.bind(this);
+        this.handleBurgerMenuClick = this.handleBurgerMenuClick.bind(this);
         this.handlechangeThemeColor = this.handlechangeThemeColor.bind(this);
     }
 

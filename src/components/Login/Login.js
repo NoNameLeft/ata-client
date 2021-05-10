@@ -26,12 +26,14 @@ const Login = (props) => {
 
         usersService.login(userData)
             .then(res => {
-                if(res.length === 0) {
+                let user = res.find(Boolean);
+
+                if(user === undefined) {
                     toast.error(messages.INCORRECT_INPUT_DATA);
                 }
                 else {
-                    localStorage.setItem(common.STORAGE_KEY, jwt.sign({ userID: res[0].id }, common.TOKEN_SECRET, { expiresIn: '2 days' }));
-                    props.handleLogin(res.find(Boolean));
+                    localStorage.setItem(common.STORAGE_KEY, jwt.sign({ userID: user.id }, common.TOKEN_SECRET, { expiresIn: '2 days' }));
+                    props.handleLogin(user);
                     toast.success(messages.LOGIN_SUCCESS_MESSAGE);
                     history.push('/');
                 }

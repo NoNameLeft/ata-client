@@ -6,6 +6,9 @@ class Auth {
     constructor() {
         this.authenticated = false;
         this.userID = "";
+        
+        this.verifyUser = this.verifyUser.bind(this);
+        this.isAuthenticated = this.isAuthenticated.bind(this);
     }
 
     verifyUser() {

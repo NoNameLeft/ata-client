@@ -22,6 +22,7 @@ import * as usersService from './services/usersService';
 import AuthContext from './contexts/AuthContext';
 
 class App extends Component {
+  static contextType = AuthContext;
 
   constructor() {
     super();
@@ -63,11 +64,18 @@ class App extends Component {
   handleLogin(user) {
     this.setState({
       loggedInStatus: common.LOGGED_IN_STATUS,
-      currentUser: user
+      currentUser: user,
+      theme: user.theme
     });
   }
 
   changeThemeColor() {
+    let user = {...this.state.currentUser, theme: this.state.theme === themes.LIGHT_THEME ? themes.DARK_THEME : themes.LIGHT_THEME};
+    usersService.update(this.state.currentUser.id, user)
+      .then(res => {
+        
+      }).catch(err => console.log(err));
+    
     this.setState(prevState => ({
       theme: prevState.theme === themes.LIGHT_THEME ? themes.DARK_THEME : themes.LIGHT_THEME
     }));
