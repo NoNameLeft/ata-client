@@ -11,7 +11,8 @@ export const DARK_STYLE = {
     cardFontColor: "#FFFFFF",
     headerBackground: "#A9A9A9",
     containerBackground: "#7A7A7A",
-    buttonColor: "#272727"
+    buttonColor: "#272727",
+    headerLinksColor: "#CCC"
 }
 
 export const LIGHT_STYLE = {
@@ -19,6 +20,9 @@ export const LIGHT_STYLE = {
     fontColor: "#000000",
 }
 
+/*  Some props in GlobalStyle are undefined when LIGHT_STYLE is on.
+    Therefore they don't change when switching between themes.
+*/
 export const GlobalStyles = createGlobalStyle`
 	body {
 		background-color: ${(props) => props.theme.body};
@@ -26,7 +30,7 @@ export const GlobalStyles = createGlobalStyle`
 	}
 
     .primarybtn {
-        background-color: ${(props) => props.theme.buttonColor}
+        background-color: ${(props) => props.theme.buttonColor};
     }
 
     .container {
@@ -50,6 +54,22 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     .cancelBtn {
-        background-color: ${(props) => props.theme.buttonColor}
+        background-color: ${(props) => props.theme.buttonColor};
+    }
+
+    .header {
+        background-color: ${(props) => props.theme.buttonColor};
+    }
+
+    .header a,
+    .header ul li a,
+    .slider__state {
+        color: ${(props) => props.theme.headerLinksColor};
+    }
+
+    .topline,
+    .middleline,
+    .bottomline {
+        background-color: ${(props) => props.theme.headerLinksColor};
     }
 `;

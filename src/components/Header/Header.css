@@ -178,9 +178,28 @@ input:checked + .switch__slider:before {
   .header__logo {
     font-size: 25px;
     display: inline-block;
+    position: relative;
+    top: -10px;
   }
 
   .header__navbar.change ul {
     display: block;
+  }
+
+  .header__switch {
+    width: 38px;
+    height: 18px;
+    top: 12px;
+    left: 14px;
+  }
+
+  .switch__slider:before {
+    height: 11px;
+    width: 11px;
+  }
+
+  .slider__state {
+    top: -24px;
+    left: 41px;
   }
 }

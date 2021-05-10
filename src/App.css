@@ -68,6 +68,6 @@ input[type=password]:focus {
 @media screen and (min-width: 1200px) {
   .container,
   .container__secondary {
-    width: 50%;
+    width: 35%;
   }
 }
