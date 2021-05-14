@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import { ToastContainer, Zoom } from 'react-toastify';
+import { toast, ToastContainer, Zoom } from 'react-toastify';
 import { ThemeProvider } from 'styled-components';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -11,15 +11,18 @@ import Login from './components/Login';
 import Header from './components/Header';
 import Profile from './components/Profile';
 import Register from './components/Register';
+import Contacts from './components/Contacts';
 import EditProfile from './components/EditProfile';
 
 import './App.css';
 import auth from './middlewares/auth';
 import * as common from './shared/common';
 import * as themes from './shared/themes';
+import * as messages from './shared/messages';
 import { ProtectedRoute } from './hocs/protectedRoute';
 import * as usersService from './services/usersService';
 import AuthContext from './contexts/AuthContext';
+import ErrorHandler from './components/ErrorHandler';
 
 class App extends Component {
   static contextType = AuthContext;
@@ -39,6 +42,9 @@ class App extends Component {
   }
 
   componentDidMount() {
+    /*
+      I am using external 'auth' class to get userData, cos when i use this.state props I get 404 reponse on reload
+    */
     let authUserData = auth.isAuthenticated();
     if (authUserData.isAuth) {
       usersService.getCurrentUser(authUserData.currentUserId)
@@ -52,12 +58,13 @@ class App extends Component {
       this.handleLogout();
     }
   }
-  
+
   handleLogout() {
     localStorage.removeItem(common.STORAGE_KEY);
     this.setState({
       loggedInStatus: common.DEFAULT_LOGIN_STATUS,
-      currentUser: {}
+      currentUser: {},
+      theme: themes.LIGHT_THEME
     });
   }
 
@@ -70,12 +77,14 @@ class App extends Component {
   }
 
   changeThemeColor() {
-    let user = {...this.state.currentUser, theme: this.state.theme === themes.LIGHT_THEME ? themes.DARK_THEME : themes.LIGHT_THEME};
-    usersService.update(this.state.currentUser.id, user)
-      .then(res => {
-        
-      }).catch(err => console.log(err));
-    
+    if (auth.isAuthenticated().isAuth) {
+      let user = { ...this.state.currentUser, theme: this.state.theme === themes.LIGHT_THEME ? themes.DARK_THEME : themes.LIGHT_THEME };
+      usersService.update(this.state.currentUser.id, user)
+        .then(() => {
+          toast.success(messages.CHANGE_THEME_SUCCESS);
+        }).catch(err => console.log(err));
+    }
+
     this.setState(prevState => ({
       theme: prevState.theme === themes.LIGHT_THEME ? themes.DARK_THEME : themes.LIGHT_THEME
     }));
@@ -104,22 +113,27 @@ class App extends Component {
               handleLogout={this.handleLogout}
               changeThemeColor={this.changeThemeColor}
             />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <ProtectedRoute exact path="/about" component={About} />
-              <Route path="/register" component={Register} />
-              <Route path="/login" render={() => {
-                return <Login handleLogin={this.handleLogin} />
-              }} />
-              <Route path="/profile" render={() => {
-                return <Profile handleLogout={this.handleLogout} />
-              }} />
-              <ProtectedRoute exact path="/editProfile" component={EditProfile} />
-              <Route path="/logout" render={() => {
-                localStorage.removeItem(common.STORAGE_KEY);
-                return <Redirect to="/" />
-              }} />
-            </Switch>
+           
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <ProtectedRoute exact path="/about" component={About} />
+                <Route path="/register" component={Register} />
+                <Route path="/login" render={() => {
+                  return <Login handleLogin={this.handleLogin} />
+                }} />
+                <Route path="/profile" render={() => {
+                  return <Profile handleLogout={this.handleLogout} />
+                }} />
+                <ProtectedRoute exact path="/contacts" component={() => {
+                  return <Contacts userEmail={this.state.currentUser.email} />
+                }} />
+                <ProtectedRoute exact path="/editProfile" component={EditProfile} />
+                <Route path="/logout" render={() => {
+                  localStorage.removeItem(common.STORAGE_KEY);
+                  return <Redirect to="/" />
+                }} />
+                <Route path="errorPage" component={ErrorHandler} />
+              </Switch>
           </AuthContext.Provider>
         </div>
       </ThemeProvider>

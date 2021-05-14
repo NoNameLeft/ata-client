@@ -1,0 +1,40 @@
+.error {
+    padding: 50px;
+    text-align: center;
+}
+
+.error h3,
+.error h1 {
+    color:red;
+    margin: 0;
+}
+
+.error h3 {
+    font-size: 50px;
+    padding-top: 25px;
+}
+
+.error h1 {
+    font-size: 80px;
+    padding-top: 45px;
+    }
+
+.error p {
+    font-size: 24px;
+    padding-bottom:70px;
+    text-transform: capitalize;
+    color: #fff;
+    margin: 0;
+    padding-top: 35px;
+}
+
+.error a {
+    background:#272727;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    color: #fff;
+    font-size: 20px;
+    width: 70%;
+    transition: .3s ease-out;
+}

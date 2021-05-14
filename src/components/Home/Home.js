@@ -1,8 +1,9 @@
-import './Home.css';
-import * as common from '../../shared/common';
 import { useContext } from 'react';
+
+import * as common from '../../shared/common';
 import AuthContext from '../../contexts/AuthContext';
 
+import './Home.css';
 const Home = () => {
     const contextValue = useContext(AuthContext);
 

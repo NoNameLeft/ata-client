@@ -6,8 +6,8 @@ import AuthContext from '../../contexts/AuthContext';
 
 import * as common from '../../shared/common';
 import * as messages from '../../shared/messages';
-import './Header.css';
 
+import './Header.css';
 export default class Header extends Component {
     static contextType = AuthContext
 
@@ -40,8 +40,8 @@ export default class Header extends Component {
 
     render() {
         // TODO: try to think of better way to hide/display these elements!
-        const loginStyle = this.context.user.status === common.LOGGED_IN_STATUS ? "none" : "";
-        const logoutStyle = loginStyle !== "none" ? "none" : "";
+        const guestUserLinks = this.context.user.status === common.LOGGED_IN_STATUS ? "none" : "";
+        const loggedInUserLinks = guestUserLinks !== "none" ? "none" : "";
         const burgerMenuBarsStyle = this.state.isBurgerMenuClicked ? "change" : "";
 
         return (
@@ -66,13 +66,16 @@ export default class Header extends Component {
                             <NavLink to="/profile">Profile</NavLink>
                         </li>
                         <li>
-                            <NavLink style={{display: `${loginStyle}`}} to="/login">Login</NavLink>
+                            <NavLink style={{display: `${guestUserLinks}`}} to="/login">Login</NavLink>
                         </li>
                         <li>
-                            <NavLink style={{display: `${loginStyle}`}} to="/register">Register</NavLink>
+                            <NavLink style={{display: `${guestUserLinks}`}} to="/register">Register</NavLink>
                         </li>
                         <li>
-                            <Link style={{display: `${logoutStyle}`}} onClick={this.userLogout} to="/logout">Logout</Link>
+                            <Link style={{display: `${loggedInUserLinks}`}} to="/contacts">Contacts</Link>
+                        </li>
+                        <li>
+                            <Link style={{display: `${loggedInUserLinks}`}} onClick={this.userLogout} to="/logout">Logout</Link>
                         </li>
                     </ul>
                 </div>

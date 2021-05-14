@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import * as usersService from '../../services/usersService';
-import './About.css';
 
+import './About.css';
 const About = () => {
     let [userCount, setUserCount] = useState(0);
 

@@ -72,4 +72,9 @@ export const GlobalStyles = createGlobalStyle`
     .bottomline {
         background-color: ${(props) => props.theme.headerLinksColor};
     }
+
+    .error h3,
+    .error p {
+        color: ${(props) => props.theme.fontColor}
+    }
 `;
