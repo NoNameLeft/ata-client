@@ -6,6 +6,7 @@ import AuthContext from '../../contexts/AuthContext';
 
 import * as common from '../../shared/common';
 import * as messages from '../../shared/messages';
+import ErrorBoundary from '../ErrorBoundary';
 
 import './Header.css';
 export default class Header extends Component {
@@ -13,11 +14,11 @@ export default class Header extends Component {
 
     constructor() {
         super();
-    
+
         this.state = {
-          isBurgerMenuClicked: false
+            isBurgerMenuClicked: false
         }
-    
+
         this.userLogout = this.userLogout.bind(this);
         this.handleBurgerMenuClick = this.handleBurgerMenuClick.bind(this);
         this.handlechangeThemeColor = this.handlechangeThemeColor.bind(this);
@@ -45,41 +46,43 @@ export default class Header extends Component {
         const burgerMenuBarsStyle = this.state.isBurgerMenuClicked ? "change" : "";
 
         return (
-            <div className="header">
-                <Link to="/about" className="header__logo">ATA</Link>
-                <label className="header__switch">
-                    <input type="checkbox" defaultChecked onChange={this.handlechangeThemeColor} />
-                    <span className="switch__slider round"></span>
-                    <span className="slider__state">{this.props.currentTheme}</span>
-                </label>
-                <div className={`header__burger ${burgerMenuBarsStyle}`} onClick={this.handleBurgerMenuClick} >
-                    <div className="topline"></div>
-                    <div className="middleline"></div>
-                    <div className="bottomline"></div>
+            <ErrorBoundary>
+                <div className="header">
+                    <Link to="/about" className="header__logo">ATA</Link>
+                    <label className="header__switch">
+                        <input type="checkbox" defaultChecked onChange={this.handlechangeThemeColor} />
+                        <span className="switch__slider round"></span>
+                        <span className="slider__state">{this.props.currentTheme}</span>
+                    </label>
+                    <div className={`header__burger ${burgerMenuBarsStyle}`} onClick={this.handleBurgerMenuClick} >
+                        <div className="topline"></div>
+                        <div className="middleline"></div>
+                        <div className="bottomline"></div>
+                    </div>
+                    <div className={`header__navbar ${burgerMenuBarsStyle}`}>
+                        <ul>
+                            <li>
+                                <NavLink exact={true} to="/">Home</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/profile">Profile</NavLink>
+                            </li>
+                            <li>
+                                <NavLink style={{ display: `${guestUserLinks}` }} to="/login">Login</NavLink>
+                            </li>
+                            <li>
+                                <NavLink style={{ display: `${guestUserLinks}` }} to="/register">Register</NavLink>
+                            </li>
+                            <li>
+                                <Link style={{ display: `${loggedInUserLinks}` }} to="/contacts">Contacts</Link>
+                            </li>
+                            <li>
+                                <Link style={{ display: `${loggedInUserLinks}` }} onClick={this.userLogout} to="/logout">Logout</Link>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div className={`header__navbar ${burgerMenuBarsStyle}`}>
-                    <ul>
-                        <li>
-                            <NavLink exact={true} to="/">Home</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/profile">Profile</NavLink>
-                        </li>
-                        <li>
-                            <NavLink style={{display: `${guestUserLinks}`}} to="/login">Login</NavLink>
-                        </li>
-                        <li>
-                            <NavLink style={{display: `${guestUserLinks}`}} to="/register">Register</NavLink>
-                        </li>
-                        <li>
-                            <Link style={{display: `${loggedInUserLinks}`}} to="/contacts">Contacts</Link>
-                        </li>
-                        <li>
-                            <Link style={{display: `${loggedInUserLinks}`}} onClick={this.userLogout} to="/logout">Logout</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            </ErrorBoundary>
         )
     }
 };

@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import * as usersService from '../../services/usersService';
 import * as common from '../../shared/common';
 import * as messages from '../../shared/messages';
+import ErrorBoundary from '../ErrorBoundary';
 
 const Login = (props) => {
 
@@ -28,7 +29,7 @@ const Login = (props) => {
             .then(res => {
                 let user = res.find(Boolean);
 
-                if(user === undefined) {
+                if (user === undefined) {
                     toast.error(messages.INCORRECT_INPUT_DATA);
                 }
                 else {
@@ -42,22 +43,24 @@ const Login = (props) => {
     }
 
     return (
-        <form onSubmit={loginUser}>
-        <div className="container">
-            <h1>Login</h1>
-            <label htmlFor="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" id="email" onChange={(e) => setEmail(e.target.value)} required />
+        <ErrorBoundary>
+            <form onSubmit={loginUser}>
+                <div className="container">
+                    <h1>Login</h1>
+                    <label htmlFor="email"><b>Email</b></label>
+                    <input type="text" placeholder="Enter Email" name="email" id="email" onChange={(e) => setEmail(e.target.value)} required />
 
-            <label htmlFor="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" id="psw" onChange={(e) => setPsw(e.target.value)} required />
+                    <label htmlFor="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" id="psw" onChange={(e) => setPsw(e.target.value)} required />
 
-            <button type="submit" className="primarybtn">Login</button>
+                    <button type="submit" className="primarybtn">Login</button>
 
-            <div className="container__secondary">
-                <p>You do not have an account? <Link to="/register">Sign up</Link>?</p>
-            </div>
-        </div>
-    </form>
+                    <div className="container__secondary">
+                        <p>You do not have an account? <Link to="/register">Sign up</Link>?</p>
+                    </div>
+                </div>
+            </form>
+        </ErrorBoundary>
     );
 };
 

@@ -22,7 +22,6 @@ import * as messages from './shared/messages';
 import { ProtectedRoute } from './hocs/protectedRoute';
 import * as usersService from './services/usersService';
 import AuthContext from './contexts/AuthContext';
-import ErrorHandler from './components/ErrorHandler';
 
 class App extends Component {
   static contextType = AuthContext;
@@ -113,7 +112,6 @@ class App extends Component {
               handleLogout={this.handleLogout}
               changeThemeColor={this.changeThemeColor}
             />
-           
               <Switch>
                 <Route exact path="/" component={Home} />
                 <ProtectedRoute exact path="/about" component={About} />
@@ -132,7 +130,6 @@ class App extends Component {
                   localStorage.removeItem(common.STORAGE_KEY);
                   return <Redirect to="/" />
                 }} />
-                <Route path="errorPage" component={ErrorHandler} />
               </Switch>
           </AuthContext.Provider>
         </div>

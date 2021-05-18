@@ -9,9 +9,9 @@ import AuthContext from '../../contexts/AuthContext';
 import * as common from '../../shared/common';
 import * as messages from '../../shared/messages';
 import * as usersService from '../../services/usersService';
+import ErrorBoundary from '../ErrorBoundary';
 
 import './Profile.css';
-import ErrorHandler from '../ErrorHandler';
 const Profile = (props) => {
     const contextValue = useContext(AuthContext);
 
@@ -75,7 +75,7 @@ const Profile = (props) => {
     const status = contextValue.user.status === common.LOGGED_IN_STATUS ? common.ONLINE_USER : common.OFFLINE_USER
 
     return (
-        <ErrorHandler>
+        <ErrorBoundary>
             <div className="card">
                 <img className="card__img" src="/avatar.png" alt='profile avatar' />
                 <h1>{userInfo.name}</h1>
@@ -105,7 +105,7 @@ const Profile = (props) => {
                     </form>
                 </div>
             </div>
-        </ErrorHandler>
+        </ErrorBoundary>
     )
 };
 

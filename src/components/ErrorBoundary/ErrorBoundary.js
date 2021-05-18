@@ -3,34 +3,32 @@ import { Link } from "react-router-dom";
 
 import { FaExclamationTriangle } from "react-icons/fa";
 
-import './ErrorHandler.css';
-class ErrorHandler extends Component {
+import './ErrorBoundary.css';
+export default class ErrorBoundary extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            hasError: false
+            error: null,
+            errorInfo: null
         }
     }
 
-    static getDerivedStateFromError(error) {
-        return {
-            hasError: true
-        }
-    }
-
-    componentDidCatch(error, info) {
-        console.log('Error from errorHandler: ', error);
-        console.log('Error info from errorHandler: ', info);
+    componentDidCatch(error, errorInfo) {
+        this.setState({
+            error: error,
+            errorInfo: errorInfo
+        })
     }
 
     render() {
-        if (this.state.hasError) {
+        if (this.state.errorInfo) {
             return (
                 <section className="error">
                     <h3>Error Page</h3>
                     <h1>4 <FaExclamationTriangle /> 4</h1>
-                    <p>We are so sorry! Something must have went wrong! Please reload or try again later!</p>
+                    <p>We are so sorry. Something went wrong.</p>
+                    <p>{this.state.error && this.state.error.toString()}</p>
                     <Link to="/">Back To Home</Link>
                 </section>
             )
@@ -39,5 +37,3 @@ class ErrorHandler extends Component {
         return this.props.children
     }
 }
-
-export default ErrorHandler;

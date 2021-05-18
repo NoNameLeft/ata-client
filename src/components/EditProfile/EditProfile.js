@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 
 import AuthContext from "../../contexts/AuthContext";
 import * as usersService from '../../services/usersService';
+import ErrorBoundary from '../ErrorBoundary';
 
 const EditProfile = () => {
     const contextValue = useContext(AuthContext);
@@ -16,7 +17,7 @@ const EditProfile = () => {
         e.preventDefault();
         usersService.getCurrentUser(contextValue.user.id)
             .then(res => {
-                let updatedUser = {...res, name: updatedName === "" ? contextValue.user.name : updatedName, email: updatedEmail === "" ? contextValue.user.email : updatedEmail};
+                let updatedUser = { ...res, name: updatedName === "" ? contextValue.user.name : updatedName, email: updatedEmail === "" ? contextValue.user.email : updatedEmail };
                 usersService.update(contextValue.user.id, updatedUser)
                     .then(() => {
                         history.push('/profile');
@@ -25,16 +26,18 @@ const EditProfile = () => {
     }
 
     return (
-        <div className="card">
-            <img className="card__img" src="/avatar.png" alt='profile avatar' />
-            <label  htmlFor="name">Enter your name:</label>
-            <input type="text" className="name" placeholder={contextValue.user.name} style={{textAlign:"center"}} onChange={(e) => {setUpdatedName(e.target.value)}}></input>
-            <label htmlFor="email">Enter your email:</label>
-            <input type="text" className="email" placeholder={contextValue.user.email} style={{textAlign:"center"}} onChange={(e) => {setUpdatedEmail(e.target.value)}}></input>
-            <div className="card__btns">
-                <button className="editBtn" onClick={handleSaveChanges}>Save Changes</button>
+        <ErrorBoundary>
+            <div className="card">
+                <img className="card__img" src="/avatar.png" alt='profile avatar' />
+                <label htmlFor="name">Enter your name:</label>
+                <input type="text" className="name" placeholder={contextValue.user.name} style={{ textAlign: "center" }} onChange={(e) => { setUpdatedName(e.target.value) }}></input>
+                <label htmlFor="email">Enter your email:</label>
+                <input type="text" className="email" placeholder={contextValue.user.email} style={{ textAlign: "center" }} onChange={(e) => { setUpdatedEmail(e.target.value) }}></input>
+                <div className="card__btns">
+                    <button className="editBtn" onClick={handleSaveChanges}>Save Changes</button>
+                </div>
             </div>
-        </div>
+        </ErrorBoundary>
     )
 };
 
