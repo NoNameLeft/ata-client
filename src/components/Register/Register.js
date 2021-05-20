@@ -21,24 +21,22 @@ const Register = () => {
     function registerUser(e) {
         e.preventDefault();
 
-        if (psw === pswRepeat) {
-            const userData = {
-                id: uuidv4(),
-                email,
-                name: uname,
-                password: sha256(psw),
-            }
+        const userData = {
+            username: uname,
+            email,
+            password: psw,
+            rePassword: pswRepeat
+        };
 
-            usersService.register(userData)
-                .then(() => {
-                    toast.success(messages.REGISTER_SUCCESS_MESSAGE);
-                    history.push('/login');
-                })
-                .catch(err => {
-                    console.log(err);
-                    toast.error(messages.GENERIC_ERROR_MESSAGE);
-                });
-        }
+        usersService.register(userData)
+            .then(() => {
+                toast.success(messages.REGISTER_SUCCESS_MESSAGE);
+                history.push('/login');
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error(messages.GENERIC_ERROR_MESSAGE);
+            });
     }
 
     return (
