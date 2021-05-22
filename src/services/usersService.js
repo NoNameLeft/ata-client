@@ -1,4 +1,4 @@
-const url = "http://localhost:5000/users";
+const url = "https://floating-fortress-59246.herokuapp.com/users";
 
 export const register = (userData) => {
     return fetch(url, {
